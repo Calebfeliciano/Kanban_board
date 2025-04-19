@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
-import path from 'path'; // ✅ Use path module for cross-platform compatibility
+import path from 'path';
 
 import routes from './routes/index.js';
 import { sequelize } from './models/index.js';
@@ -11,7 +11,7 @@ const forceDatabaseRefresh = false;
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ Use process.cwd() to resolve root directory
+// ✅ Resolve to correct absolute path for frontend build
 const clientDistPath = path.join(process.cwd(), 'client/dist');
 
 // ✅ Serve static frontend files
@@ -23,7 +23,7 @@ app.use(express.json());
 // ✅ API routes
 app.use(routes);
 
-// ✅ Fallback for React Router
+// ✅ Fallback route for React Router (e.g., /login, /edit, etc.)
 app.get('*', (req, res) => {
   res.sendFile(path.join(clientDistPath, 'index.html'));
 });
