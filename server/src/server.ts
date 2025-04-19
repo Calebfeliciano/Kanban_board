@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ✅ Resolve to correct absolute path for frontend build
-const clientDistPath = path.join(__dirname, '../../../client/dist');
+const clientDistPath = path.join(__dirname, 'client');
 
 // 🛠 Temp debug logs for deployment verification
 console.log("🛠 process.cwd():", process.cwd());
