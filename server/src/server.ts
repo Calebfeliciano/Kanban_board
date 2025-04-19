@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 // ✅ Resolve to correct absolute path for frontend build
 const clientDistPath = path.join(process.cwd(), 'client/dist');
 
-// ✅ Serve static frontend files
+// ✅ Serve static frontend files from the build directory
 app.use(express.static(clientDistPath));
 
 // ✅ Parse JSON requests
