@@ -11,24 +11,24 @@ const forceDatabaseRefresh = false;
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from the frontend build
-app.use(express.static(path.join(__dirname, '../client/dist')));
+// ✅ Serve static files from the frontend build
+app.use(express.static(path.resolve('client/dist')));
 
-// Parse JSON requests
+// ✅ Parse JSON requests
 app.use(express.json());
 
-// API routes
+// ✅ API routes
 app.use(routes);
 
-// Fallback route to support React Router
+// ✅ Fallback route to support React Router
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+  res.sendFile(path.resolve('client/dist', 'index.html'));
 });
 
-// Diagnostic log for DB connection
+// 🧪 Diagnostic log for DB connection
 console.log("⏳ Attempting DB connection...");
 
-// Start server after DB sync
+// ✅ Start server after DB sync
 sequelize.sync({ force: forceDatabaseRefresh })
   .then(() => {
     console.log("✅ DB connected. Starting server...");
