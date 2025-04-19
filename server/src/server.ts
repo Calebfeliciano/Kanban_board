@@ -25,9 +25,17 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
 });
 
+// Diagnostic log for DB connection
+console.log("⏳ Attempting DB connection...");
+
 // Start server after DB sync
-sequelize.sync({ force: forceDatabaseRefresh }).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
+sequelize.sync({ force: forceDatabaseRefresh })
+  .then(() => {
+    console.log("✅ DB connected. Starting server...");
+    app.listen(PORT, () => {
+      console.log(`✅ Server is listening on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ DB connection failed:", err);
   });
-});
