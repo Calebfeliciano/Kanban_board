@@ -95,12 +95,12 @@ const CreateTicketForm = () => {
           ))}
         </select>
 
-        <button type='submit'
-        className='btn'>Create Ticket</button>
+        <button type='submit' className='btn btn--edit'>Create Ticket</button>
       </form>
     </div>
   );
 };
 
 export default CreateTicketForm;
+
 

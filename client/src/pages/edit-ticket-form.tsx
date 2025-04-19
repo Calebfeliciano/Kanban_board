@@ -76,9 +76,7 @@ const EditTicketForm = () => {
             onChange={handleChange}
           />
 
-          <button type='submit'
-          className='btn'
-          >Update Ticket</button>
+          <button type='submit' className='btn btn--edit'>Update Ticket</button>
         </form>
       ) : (
         <div>Loading ticket info...</div>
@@ -88,3 +86,4 @@ const EditTicketForm = () => {
 };
 
 export default EditTicketForm;
+
