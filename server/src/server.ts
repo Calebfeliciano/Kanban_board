@@ -1,22 +1,32 @@
-const forceDatabaseRefresh = false;
-
 import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
+import path from 'path';
+
 import routes from './routes/index.js';
 import { sequelize } from './models/index.js';
 
+const forceDatabaseRefresh = false;
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serves static files in the entire client's dist folder
-app.use(express.static('../client/dist'));
+// Serve static files from the frontend build
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
+// Parse JSON requests
 app.use(express.json());
+
+// API routes
 app.use(routes);
 
-sequelize.sync({force: forceDatabaseRefresh}).then(() => {
+// Fallback route to support React Router
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+});
+
+// Start server after DB sync
+sequelize.sync({ force: forceDatabaseRefresh }).then(() => {
   app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
   });
