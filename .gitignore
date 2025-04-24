@@ -28,6 +28,3 @@ dist-ssr
 *.sw?
 # Environment variable files
 .env
-.env.*
-!.envexample
-
